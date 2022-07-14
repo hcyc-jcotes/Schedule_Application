@@ -58,13 +58,13 @@
     </LinearLayout>
 
     <TextView
-        android:text="Getting Graph Data..."
-        android:textColor="#3f3f3f"
+        android:id="@+id/graphData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:id="@+id/graphData"
-        android:visibility="invisible"/>
+        android:text="Getting Graph Data..."
+        android:textColor="#3f3f3f"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/current_user"
@@ -72,7 +72,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_weight="0.8"
-        android:text="Account info goes here..." />
+        android:text="Account info goes here..."
+        android:textColor="@color/black"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/txt_log"
@@ -80,5 +82,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_weight="0.8"
-        android:text="Output goes here..." />
+        android:text="Output goes here..."
+        android:textColor="@color/black" />
+
 </LinearLayout>

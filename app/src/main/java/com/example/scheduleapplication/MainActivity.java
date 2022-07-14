@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             signOutButton.setEnabled(true);
             callGraphApiInteractiveButton.setEnabled(true);
             callGraphApiSilentButton.setEnabled(true);
-            currentUserTextView.setText(account.getUsername());
+            currentUserTextView.setText("Name " + account.getUsername());
         } else {
             signInButton.setEnabled(true);
             signOutButton.setEnabled(false);
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void success(final Drive drive) {
                         Log.d(TAG, "Found Drive " + drive.id);
-                        //displayGraphResult(drive.getRawObject());
+                        displayGraphResult(drive.name);
                     }
 
                     @Override
@@ -250,6 +250,10 @@ public class MainActivity extends AppCompatActivity {
                         displayError(ex);
                     }
                 });
+    }
+
+    private void displayGraphResult(@NonNull String graphResponse) {
+        logTextView.setText(graphResponse + " hey");
     }
 
 

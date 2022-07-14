@@ -1,13 +1,14 @@
 {
 "client_id" : "244f4968-08af-4ae0-989b-be0cb69f0453",
 "authorization_user_agent" : "DEFAULT",
-"redirect_uri" : "msauth://com.example.scheduleapplication/XuRiB+xR3A128pGbLvkou8JO8DA=",
+"redirect_uri" : "msauth://com.example.scheduleapplication/3wsA420zfgngNaxYxdZYMKdaxXw%3D",
+  "account_mode" : "SINGLE",
 "authorities" : [
 {
 "type": "AAD",
 "audience": {
-  "type": "AzureADMyOrg",
-  "tenant_id": "f7352fc4-7b8c-4cc5-8606-5183d26cb035"
+"type": "AzureADMyOrg",
+"tenant_id": "f7352fc4-7b8c-4cc5-8606-5183d26cb035"
 }
 }
 ]
