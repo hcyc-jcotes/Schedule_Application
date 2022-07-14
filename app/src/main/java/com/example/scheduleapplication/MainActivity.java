@@ -17,7 +17,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.scheduleapplication.databinding.ActivityMainBinding;
 import com.microsoft.graph.authentication.IAuthenticationProvider;
 import com.microsoft.graph.concurrency.ICallback;
 import com.microsoft.graph.core.ClientException;
@@ -37,7 +36,6 @@ import com.microsoft.identity.client.exception.MsalException;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
     private final static String[] SCOPES = {"Files.Read"};
     /* Azure AD v2 Configs */
     final static String AUTHORITY = "https://login.microsoftonline.com/common";
@@ -48,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
     /* UI & Debugging Variables */
     Button signInButton;
     Button signOutButton;
-    Button callGraphApiInteractiveButton;
-    Button callGraphApiSilentButton;
-    TextView logTextView;
-    TextView currentUserTextView;
+    TextView welcomeText;
+    //Button callGraphApiInteractiveButton;
+    //Button callGraphApiSilentButton;
+    //TextView logTextView;
+    //TextView currentUserTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +74,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayError(@NonNull final Exception exception) {
-        logTextView.setText(exception.toString());
+        //logTextView.setText(exception.toString());
     }
 
 
     private void performOperationOnSignOut() {
         final String signOutText = "Signed Out.";
-        currentUserTextView.setText("");
+        //currentUserTextView.setText("");
         Toast.makeText(getApplicationContext(), signOutText, Toast.LENGTH_SHORT)
                 .show();
     }
@@ -90,16 +89,18 @@ public class MainActivity extends AppCompatActivity {
         if (account != null) {
             signInButton.setEnabled(false);
             signOutButton.setEnabled(true);
-            callGraphApiInteractiveButton.setEnabled(true);
-            callGraphApiSilentButton.setEnabled(true);
-            currentUserTextView.setText("Name " + account.getUsername());
+            welcomeText.setText("Welcome to the Scheduler App!");
+            //callGraphApiInteractiveButton.setEnabled(true);
+            //callGraphApiSilentButton.setEnabled(true);
+            //currentUserTextView.setText("Name " + account.getUsername());
         } else {
             signInButton.setEnabled(true);
             signOutButton.setEnabled(false);
-            callGraphApiInteractiveButton.setEnabled(false);
-            callGraphApiSilentButton.setEnabled(false);
-            currentUserTextView.setText("");
-            logTextView.setText("");
+            welcomeText.setText("Press login to continue.");
+            //callGraphApiInteractiveButton.setEnabled(false);
+            //callGraphApiSilentButton.setEnabled(false);
+            //currentUserTextView.setText("");
+            //logTextView.setText("");
         }
     }
 
@@ -114,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
             public void onAccountLoaded(@Nullable IAccount activeAccount) {
                 // You can use the account data to update your UI or your app database.
                 updateUI(activeAccount);
+                //Intent intent = new Intent(MainActivity.this,ScheduleActivity.class);
+                //String message = editText.getText().toString();
+                //intent.putExtra(EXTRA_MESSAGE, message);
+                //startActivity(intent);
             }
 
             @Override
@@ -133,11 +138,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeUI(){
         signInButton = findViewById(R.id.signIn);
-        callGraphApiSilentButton = findViewById(R.id.callGraphSilent);
-        callGraphApiInteractiveButton = findViewById(R.id.callGraphInteractive);
+        welcomeText = findViewById(R.id.welcome);
+        //callGraphApiSilentButton = findViewById(R.id.callGraphSilent);
+        //callGraphApiInteractiveButton = findViewById(R.id.callGraphInteractive);
         signOutButton = findViewById(R.id.clearCache);
-        logTextView = findViewById(R.id.txt_log);
-        currentUserTextView = findViewById(R.id.current_user);
+        //logTextView = findViewById(R.id.txt_log);
+        //currentUserTextView = findViewById(R.id.current_user);
 
         //Sign in user
         signInButton.setOnClickListener(new View.OnClickListener(){
@@ -171,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Interactive
-        callGraphApiInteractiveButton.setOnClickListener(new View.OnClickListener() {
+        /*callGraphApiInteractiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mSingleAccountApp == null) {
@@ -190,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 mSingleAccountApp.acquireTokenSilentAsync(SCOPES, AUTHORITY, getAuthSilentCallback());
             }
-        });
+        });*/
     }
 
     private AuthenticationCallback getAuthInteractiveCallback() {
@@ -203,6 +209,10 @@ public class MainActivity extends AppCompatActivity {
                 updateUI(authenticationResult.getAccount());
                 /* call graph */
                 callGraphAPI(authenticationResult);
+                //Intent intent = new Intent(MainActivity.this,ScheduleActivity.class);
+                //String message = editText.getText().toString();
+                //intent.putExtra(EXTRA_MESSAGE, message);
+                //startActivity(intent);
             }
 
             @Override
@@ -253,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayGraphResult(@NonNull String graphResponse) {
-        logTextView.setText(graphResponse + " hey");
+        //logTextView.setText(graphResponse + " hey");
     }
 
 
