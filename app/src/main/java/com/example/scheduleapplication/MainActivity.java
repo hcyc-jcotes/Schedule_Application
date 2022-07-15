@@ -113,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
         mSingleAccountApp.getCurrentAccountAsync(new ISingleAccountPublicClientApplication.CurrentAccountCallback() {
             @Override
             public void onAccountLoaded(@Nullable IAccount activeAccount) {
+                if(activeAccount != null){
+                    Log.d(activeAccount.getUsername(), "Cuenta activa");
+                }
                 // You can use the account data to update your UI or your app database.
                 updateUI(activeAccount);
                 //Intent intent = new Intent(MainActivity.this,ScheduleActivity.class);
