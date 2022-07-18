@@ -1,9 +1,11 @@
 {
 "client_id" : "244f4968-08af-4ae0-989b-be0cb69f0453",
 "authorization_user_agent" : "DEFAULT",
-"redirect_uri" : "msauth://com.example.scheduleapplication/3wsA420zfgngNaxYxdZYMKdaxXw%3D",
+"redirect_uri" : "msauth://com.example.scheduleapplication/2pbB6x1SYif4jkhGfqYzq9HuNb8%3D",
+  "broker_redirect_uri_registered" : true,
   "account_mode" : "SINGLE",
-"authorities" : [
+
+  "authorities" : [
 {
 "type": "AAD",
 "audience": {

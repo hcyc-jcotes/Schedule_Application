@@ -45,4 +45,5 @@ dependencies {
     implementation 'com.microsoft.identity.client:msal:1.4.0'
     implementation 'com.microsoft.graph:microsoft-graph:1.5.+'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+
 }

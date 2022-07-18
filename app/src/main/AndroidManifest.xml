@@ -26,7 +26,7 @@
 
                 <data
                     android:host="com.example.scheduleapplication"
-                    android:path="/3wsA420zfgngNaxYxdZYMKdaxXw="
+                    android:path="/2pbB6x1SYif4jkhGfqYzq9HuNb8="
                     android:scheme="msauth" />
             </intent-filter>
         </activity>

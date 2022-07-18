@@ -1,5 +1,6 @@
 package com.example.scheduleapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     /* UI & Debugging Variables */
     Button signInButton;
     Button signOutButton;
+    Button scheduleButton;
     TextView welcomeText;
     //Button callGraphApiInteractiveButton;
     //Button callGraphApiSilentButton;
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayError(@NonNull final Exception exception) {
+        Log.d(exception.toString(), "EXCEPTION");
+        Toast.makeText(getApplicationContext(),exception.toString(),Toast.LENGTH_LONG).show();
         //logTextView.setText(exception.toString());
     }
 
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         if (account != null) {
             signInButton.setEnabled(false);
             signOutButton.setEnabled(true);
+            scheduleButton.setEnabled(true);
             welcomeText.setText("Welcome to the Scheduler App!");
             //callGraphApiInteractiveButton.setEnabled(true);
             //callGraphApiSilentButton.setEnabled(true);
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             signInButton.setEnabled(true);
             signOutButton.setEnabled(false);
+            scheduleButton.setEnabled(false);
             welcomeText.setText("Press login to continue.");
             //callGraphApiInteractiveButton.setEnabled(false);
             //callGraphApiSilentButton.setEnabled(false);
@@ -140,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeUI(){
+        scheduleButton = findViewById(R.id.schedule);
         signInButton = findViewById(R.id.signIn);
         welcomeText = findViewById(R.id.welcome);
         //callGraphApiSilentButton = findViewById(R.id.callGraphSilent);
@@ -147,6 +154,34 @@ public class MainActivity extends AppCompatActivity {
         signOutButton = findViewById(R.id.clearCache);
         //logTextView = findViewById(R.id.txt_log);
         //currentUserTextView = findViewById(R.id.current_user);
+
+        try {
+            android.content.pm.PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.example.scheduleapplication",
+                    android.content.pm.PackageManager.GET_SIGNATURES);
+            for (android.content.pm.Signature signature : info.signatures) {
+                java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                android.util.Log.d("KeyHash", "KeyHash:" + android.util.Base64.encodeToString(md.digest(),
+                        android.util.Base64.DEFAULT));
+
+            }
+        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+
+        } catch (java.security.NoSuchAlgorithmException e) {
+
+        }
+        //Schedule hour
+        scheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ScheduleActivity.class);
+                //String message = editText.getText().toString();
+                //intent.putExtra(EXTRA_MESSAGE, message);
+                startActivity(intent);
+
+            }
+        });
 
         //Sign in user
         signInButton.setOnClickListener(new View.OnClickListener(){
@@ -212,10 +247,7 @@ public class MainActivity extends AppCompatActivity {
                 updateUI(authenticationResult.getAccount());
                 /* call graph */
                 callGraphAPI(authenticationResult);
-                //Intent intent = new Intent(MainActivity.this,ScheduleActivity.class);
-                //String message = editText.getText().toString();
-                //intent.putExtra(EXTRA_MESSAGE, message);
-                //startActivity(intent);
+
             }
 
             @Override
